@@ -1,5 +1,5 @@
 ﻿function Parse-IniFile ($file) {
-    ; Thanks to http://stackoverflow.com/a/422529/1306490
+    # Thanks to http://stackoverflow.com/a/422529/1306490
     $ini = @{}
 
     # Create a default section if none exist in the file. Like a java prop file.
