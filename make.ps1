@@ -22,24 +22,25 @@
     $ini["DEFAULT"]
 }
 
-$config = Parse-IniFile(".\config.ini");
-$config["drive_letter"] = $config["project_path"].Substring(0,1).ToLower()
+$config = Parse-IniFile(".\config.ini")
+$config["project_path_linux"] = "/mnt/$($config["project_path"].Substring(0,1).ToLower())/$($config["project_path"].Substring(3))"
+
 
 function ESP32-Make-Command($command) {
     if ($command -eq "all") {
         $command = "all -j$($config["threads"])"
     }
-    bash -l -c "cd /mnt/$($config["drive_letter"])$($config["project_path"]) && make $($command)"
+    bash -l -c "cd $($config["project_path_linux"]) && make $($command)"
  }
 
 function ESP32-Flash-Command {
     ESP32-Make-Command "all"
     $cmd =  "python $($config["idf_path"])/components/esptool_py/esptool/esptool.py " +
-        "--chip esp32 --port $($config["port"]) --baud $($config["flash_baud"]) --before esp32r0 " + 
-        "--after hard_reset write_flash -u --flash_mode dio --flash_freq 40m --flash_size detect " + 
-        "0x1000 $($config["drive_letter"]):$($config["project_path"])/build/bootloader/bootloader.bin " + 
-        "0x10000 $($config["drive_letter"]):$($config["project_path"])/build/p1p.bin " + 
-        "0x8000 $($config["drive_letter"]):$($config["project_path"])/build/partitions_singleapp.bin"
+        "--chip esp32 --port $($config["port"]) --baud $($config["flash_baud"]) --before esp32r0 " +
+        "--after hard_reset write_flash -u --flash_mode dio --flash_freq 40m --flash_size detect " +
+        "0x1000 $($config["project_path"])/build/bootloader/bootloader.bin " +
+        "0x10000 $($config["project_path"])/build/p1p.bin " +
+        "0x8000 $($config["project_path"])/build/partitions_singleapp.bin"
 
     Invoke-Expression $cmd
 }
