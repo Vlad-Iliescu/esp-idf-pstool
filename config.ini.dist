@@ -1,9 +1,7 @@
-;The drive letter where the project is located
-drive_letter = C
 ;Path to where the project is stored. Use linux style
 idf_path = C:/esp32/esp-idf
-;Project path without drive e.g. from C:/path/to/project => /path/to/project
-project_path = /esp32/project
+;Project path with linux style /
+project_path = C:/esp32/project
 ;Windows PORT name
 port = COM3
 ;Flash Baud rate

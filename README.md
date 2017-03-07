@@ -74,10 +74,9 @@ Either by running `Windows PowerShell` app or by typing powershell in a cmd wind
 Type `ESP32-Make` for a list of known commands
 
 ### TODOs:
-1. Get `drive_letter` from project path
-2. Add more context to how I arrived to this solution
-3. Parse `ESP32-Make all` output and use that for the `ESP32-Make flash` by replacing the paths
-4. Parse the `sdkconfig` config file for data
-5. `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force;`
-6. Get error code for each command and block next if error
-7. Core dump
+1. Add more context to how I arrived to this solution
+2. Parse `ESP32-Make all` output and use that for the `ESP32-Make flash` by replacing the paths
+3. Parse the `sdkconfig` config file for data
+4. `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force;`
+5. Get error code for each command and block next if error
+6. Core dump

@@ -23,12 +23,13 @@
 }
 
 $config = Parse-IniFile(".\config.ini");
+$config["drive_letter"] = $config["project_path"].Substring(0,1).ToLower()
 
 function ESP32-Make-Command($command) {
     if ($command -eq "all") {
         $command = "all -j$($config["threads"])"
     }
-    bash -l -c "cd /mnt/$($config["drive_letter"].ToLower())$($config["project_path"]) && make $($command)"
+    bash -l -c "cd /mnt/$($config["drive_letter"])$($config["project_path"]) && make $($command)"
  }
 
 function ESP32-Flash-Command {
