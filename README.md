@@ -75,8 +75,7 @@ Type `ESP32-Make` for a list of known commands
 
 ### TODOs:
 1. Add more context to how I arrived to this solution
-2. Parse `ESP32-Make all` output and use that for the `ESP32-Make flash` by replacing the paths
-3. Parse the `sdkconfig` config file for data
-4. `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force;`
-5. Get error code for each command and block next if error
-6. Core dump
+2. Parse the `sdkconfig` config file for data
+3. `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force;`
+4. Get error code for each command and block next if error
+5. Core dump
