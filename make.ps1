@@ -31,8 +31,8 @@ function _To-Linux-Path($path) {
     if ($path -match '^([A-z])\:(.*)$') {
         return "/mnt/$($matches[1].ToLower())$(Normalize-Path $matches[2])"
     }
-    $URL_Format_Error = New-Object System.FormatException "Wrong Windows path format: $($path)"
-    Throw $URL_Format_Error
+    $error = New-Object System.FormatException "Wrong Windows path format: $($path)"
+    Throw $error
 }
 
 function _To-Windows-Path($path) {
@@ -40,18 +40,22 @@ function _To-Windows-Path($path) {
     if ($path -match '^/mnt/([A-z])(.*)$') {
         return "$($matches[1]):$($matches[2])"
     }
-    $FormatError = New-Object System.FormatException "Wrong Linux path format (must start with /mnt/): $($path)"
-    Throw $FormatError
+    $error = New-Object System.FormatException "Wrong Linux path format (must start with /mnt/): $($path)"
+    Throw $error
 }
 
 function _Read-Config {
-    $config = Parse-IniFile(".\config.ini")
+    $config = Parse-IniFile ".\config.ini"
     $config["project_path"] = Normalize-Path $config["project_path"]
     $config["idf_path"] = Normalize-Path $config["idf_path"]
     $config["idf_path_linux"] = _To-Linux-Path $config["idf_path"]
     $config["project_path_linux"] = _To-Linux-Path $config["project_path"]
     $config["script_path"] = _To-Linux-Path $PSScriptRoot
     $config["output_file"] = "$($config["script_path"])/output.log"
+
+    $sdk = Parse-IniFile "$($config["project_path"])/sdkconfig"
+    $config["port"] = $sdk["CONFIG_ESPTOOLPY_PORT"] -replace '"', ''
+    $config["monitor_baud"] = $sdk["CONFIG_MONITOR_BAUD"]
 
     return $config
 }
@@ -65,8 +69,8 @@ $config = _Read-Config
 function _Make-Flash-Command {
     $cmd = _Get-Last-Output
     if (!$cmd.StartsWith("python")) {
-        $Flash_Error = New-Object System.ApplicationException "Flasher command not found. Did the make command run successfull?"
-        Throw $Flash_Error
+        $error = New-Object System.ApplicationException "Flasher command not found. Did the make command run successfull?"
+        Throw $error
     }
     $cmd = $cmd -replace $config["idf_path_linux"], $config["idf_path"]
     $cmd = $cmd -replace $config["project_path_linux"], $config["project_path"]

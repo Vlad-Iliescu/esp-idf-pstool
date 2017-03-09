@@ -1,13 +1,7 @@
-;Path to where the project is stored. Use linux style
+;Path to where the project is stored
 idf_path = C:/esp32/esp-idf
-;Project path with linux style /
+;Project path
 project_path = C:/esp32/project
-;Windows PORT name
-port = COM3
-;Flash Baud rate
-flash_baud = 921600
-;Monitor Baud rate
-monitor_baud = 115200
 ;Make nr of threads (usully nr of cores +1)
 threads = 9
 
