@@ -75,6 +75,5 @@ Type `ESP32-Make` for a list of known commands
 
 ### TODOs:
 1. Add more context to how I arrived to this solution
-2. Parse the `sdkconfig` config file for data
-3. `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force;`
-4. Get error code for each command and block next if error
+2. `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force;`
+3. Get error code for each command and block next if error
