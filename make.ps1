@@ -97,6 +97,13 @@ function _ESP32-Monitor-Command {
     cmd.exe /c "python -m serial.tools.miniterm --rts 0 --dtr 0 --raw $($config["port"]) $($config["monitor_baud"])"
 }
 
+function _ESP32-Coredump {
+    $cmd = "bash -l -c `"python $($config["idf_path_linux"])/components/espcoredump/espcoredump.py info_corefile -t b64 " + 
+            "-c $($config["project_path_linux"])/core.dat $($config["project_path_linux"])/build/$($config["project_name"]).elf`""
+    
+    Invoke-Expression $cmd
+}
+
 function ESP32-Make() {
     if (!$args.Count) {
         $args = @("help")
@@ -108,6 +115,8 @@ function ESP32-Make() {
             $cmd = "$($cmd); _ESP32-Flash-Command"
         } elseif ($arg -eq "monitor") {
             $cmd = "$($cmd); _ESP32-Monitor-Command"
+        } elseif ($arg -eq "coredump") {
+            $cmd = "$($cmd); _ESP32-Coredump"
         } elseif ($arg -eq "help") {
             write-host ""
             write-host "Welcome to Espressif IDF build system porting to PowerShell. Some useful make targets:" -foreground "green"

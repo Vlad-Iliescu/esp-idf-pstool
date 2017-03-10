@@ -4,5 +4,7 @@ idf_path = C:/esp32/esp-idf
 project_path = C:/esp32/project
 ;Make nr of threads (usully nr of cores +1)
 threads = 9
+;Project name, find it in Makefile (PROJECT_NAME := app-template)
+project_name = app-template
 
 

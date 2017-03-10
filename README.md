@@ -78,4 +78,3 @@ Type `ESP32-Make` for a list of known commands
 2. Parse the `sdkconfig` config file for data
 3. `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force;`
 4. Get error code for each command and block next if error
-5. Core dump
