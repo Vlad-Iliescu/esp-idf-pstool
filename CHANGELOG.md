@@ -6,6 +6,7 @@
 * Removed `port`, `flash_baud` and `monitor_baud`. These are now taken from the `sdkconfig` config file
 * Added `coredump` parse functionality. To use this create a file called `core.dat` in your project root and copy the ESP32 coredup string. After run `ESP32-Make coredump`.
 * Parse the `sdkconfig` config file for data
+* History :D
 
 [0.9.0](#) (2017-03-05) 
 * Initial release

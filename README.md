@@ -1,4 +1,5 @@
-#ESP32 Windows 10 toolchain using developer mode bash
+ESP32 Windows 10 toolchain using developer mode bash
+====================================================
 
 This guide will walk you to the process of installing [ESP-IDF](https://github.com/espressif/esp-idf) toolchain 
 using Developer mode Subsystem for Linux (Ubuntu 14) and some PowerShell scripts. 
@@ -63,17 +64,21 @@ cp config.ini.dist config.ini
 Now edit `config.ini` in accordance to your setup
 
 ## Step 4: Import and use the PowerShell functions
-### 4.1 Start PowerShell
+### 4.1 Install python 
+I use python 3.6, but it should work with any python installation. After istalll make sure you add python to path.
+### 4.2 Install pyserial
+`pip install pyserial`
+### 4.3 Start PowerShell
 Either by running `Windows PowerShell` app or by typing powershell in a cmd window.
-### 4.2 Navigate to project tool
+### 4.4 Navigate to project tool
 `cd .\esp32\esp-idf-pstool`
-### 4.3 Import
+### 4.5 Import
 `. .\make.ps1`
 
 ### Step 5: Use `ESP32-Make`
 Type `ESP32-Make` for a list of known commands
 
+### [A bit of history on how I got to this solution](https://github.com/Vlad-Iliescu/esp-idf-pstool/wiki/history)
+ 
 ### TODOs:
-1. Add more context to how I arrived to this solution
-2. `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force;`
-3. Get error code for each command and block next if error
+1. `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force;`
